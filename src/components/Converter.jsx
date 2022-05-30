@@ -17,10 +17,8 @@ const Converter = () => {
     const result = await (await fetch(url)).json()
     setResult(Object.values(result.results)[0])
     setSecondValue(result.results[secondOption])
-
   }
 
-  // console.log(secondValue)
 
   useEffect(() => {
        fetchData()
@@ -29,13 +27,13 @@ const Converter = () => {
   )
 
   const handleFirstValue = (e) => {
+    setSecondValue((e * result).toFixed(3))
     setFirstValue(e)
-
-    calculate(firstValue)
   }
 
-  const calculate = (y) => {
-    setSecondValue(prevState => prevState * y)
+  const handleSecondValue = (e) => {
+    setFirstValue((e / result).toFixed(3))
+    setSecondValue(e)
   }
 
 
@@ -55,7 +53,7 @@ const Converter = () => {
 
        <input
           value={secondValue}
-          onChange={(e) => setSecondValue(e.target.value)}
+          onChange={(e) => handleSecondValue(e.target.value)}
           type="number"
        />
        <CurrencyItem
