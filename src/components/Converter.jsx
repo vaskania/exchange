@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-// import ConverterForm from "./ConverterForm";
+import ConverterForm from "./ConverterForm";
 
 const currencies = ["UAH", "USD", "EUR"]
 
@@ -17,7 +17,7 @@ const Converter = () => {
     const url = `https://api.fastforex.io/fetch-multi?from=${firstOption}&to=${secondOption}&api_key=1b3d7328f9-1d272428f1-rcosaw`
     const result = await (await fetch(url)).json()
 
-    setResult(format(result.results[secondOption]))
+    setResult(result.results[secondOption])
     setSecondValue(format(firstValue * result.results[secondOption]))
   }
 
@@ -70,6 +70,22 @@ const Converter = () => {
             currencies.filter(e => e !== firstOption).map((el, index) => <option key={index} value={el}>{el}</option>)
           }
         </select>
+
+        {/*<hr/>*/}
+
+        {/*<ConverterForm*/}
+        {/*    onChangeInput={handleFirstInput}*/}
+        {/*    option={currencies.filter(e => e !== secondOption)}*/}
+        {/*    onChangeCur={handleChangeCurrencyOne}*/}
+        {/*    inputValue={firstValue}*/}
+        {/*/>*/}
+
+        {/*<ConverterForm*/}
+        {/*    onChangeInput={handleSecondInput}*/}
+        {/*    option={currencies.filter(e => e !== firstOption)}*/}
+        {/*    onChangeCur={handleChangeCurrencyTwo}*/}
+        {/*    inputValue={secondValue}*/}
+        {/*/>*/}
 
       </>
   )

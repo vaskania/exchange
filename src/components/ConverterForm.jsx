@@ -1,12 +1,14 @@
-const ConverterForm = ({ onChange, option, inputValue }) => {
+const ConverterForm = ({onChangeInput, onChangeCur, option, inputValue}) => {
+
   return (
-     <>
-       <select onChange={onChange}>
-         {
-           option.map((el, index) => <option key={index} value={el}>{el}</option>)
-         }
-       </select>
-     </>
+      <>
+        <input type='number' onChange={e => onChangeInput(e.target.value)} value={inputValue}/>
+        <select onChange={(e) => onChangeCur(e.target.value)}>
+          {
+            option.map((el, index) => <option key={index} value={el}>{el}</option>)
+          }
+        </select>
+      </>
   )
 }
 
