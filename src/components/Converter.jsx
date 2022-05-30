@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import CurrencyItem from "./CurrencyItem";
 
 const currencyArr = ["UAH", "USD", "EUR"]
@@ -26,14 +26,25 @@ const Converter = () => {
      }, [firstOption, secondOption]
   )
 
+  const format = (number) => number.toFixed(3)
+
   const handleFirstValue = (e) => {
-    setSecondValue((e * result).toFixed(3))
+    setSecondValue(format(e * result))
     setFirstValue(e)
   }
 
   const handleSecondValue = (e) => {
-    setFirstValue((e / result).toFixed(3))
+    setFirstValue(format(e / result))
     setSecondValue(e)
+  }
+
+  const handleChangeCurrencyOne = (e) => {
+    setFirstValue(format(e / result))
+    setFirstOption(e)
+  }
+  const handleChangeCurrencyTwo = (e) => {
+    setSecondValue(format(e * result))
+    setSecondOption(e)
   }
 
 
@@ -44,24 +55,22 @@ const Converter = () => {
           onChange={(e) => handleFirstValue(e.target.value)}
           type="number"
        />
-       <CurrencyItem
-          onChange={(e) => setFirstOption(e.target.value)}
-          value={firstOption}
-          option={currencyArr.filter(e => e !== secondOption)}
-          inputValue={1}
-       />
+       <select value={firstOption} onChange={e => handleChangeCurrencyOne(e.target.value)}>
+         {
+           currencyArr.filter(e => e !== secondOption).map((el, index) => <option key={index} value={el}>{el}</option>)
+         }
+       </select>
 
        <input
           value={secondValue}
           onChange={(e) => handleSecondValue(e.target.value)}
           type="number"
        />
-       <CurrencyItem
-          onChange={(e) => setSecondOption(e.target.value)}
-          value={secondOption}
-          inputValue={result}
-          option={currencyArr.filter(e => e !== firstOption)}
-       />
+       <select value={secondOption} onChange={e => handleChangeCurrencyTwo(e.target.value)}>
+         {
+           currencyArr.filter(e => e !== firstOption).map((el, index) => <option key={index} value={el}>{el}</option>)
+         }
+       </select>
 
      </>
   )
