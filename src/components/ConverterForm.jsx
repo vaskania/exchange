@@ -1,4 +1,4 @@
-const CurrencyItem = ({ onChange, option, inputValue }) => {
+const ConverterForm = ({ onChange, option, inputValue }) => {
   return (
      <>
        <select onChange={onChange}>
@@ -10,4 +10,4 @@ const CurrencyItem = ({ onChange, option, inputValue }) => {
   )
 }
 
-export default CurrencyItem
+export default ConverterForm
